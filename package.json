@@ -1,0 +1,45 @@
+{
+  "name": "memory-game",
+  "version": "0.0.1",
+  "description": "Memory game with cool photos to train your brain",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- tests/* -R spec -t 5000 --recursive",
+    "tdd": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- tests/* -R spec -t 5000 --recursive -w",
+    "coverall": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha --report lcovonly -- tests/* -R spec -t 5000 --recursive && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+  },
+  "dependencies": {
+    "es6-promise": "^2.0.1",
+    "es6-promise-helper": "0.0.1",
+    "express": "^4.12.3",
+    "longjohn": "^0.2.4",
+    "passport": "^0.2.1",
+    "passport-eyeem": "^0.1.1"
+  },
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "chai-as-promised": "^4.1.1",
+    "coveralls": "^2.11.1",
+    "mocha": "^1.21.4",
+    "proxyquire": "^1.4.0",
+    "supertest": "^0.15.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dev-tim/memory-game.git"
+  },
+  "keywords": [
+    "game",
+    "reactjs",
+    "node",
+    "memory",
+    "photos",
+    "eyem"
+  ],
+  "author": "Tim Zadorozhniy <artem.zadorozhniy@gmail.com> (http://www.devartem.info/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dev-tim/memory-game/issues"
+  },
+  "homepage": "https://github.com/dev-tim/memory-game"
+}
