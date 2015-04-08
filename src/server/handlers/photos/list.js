@@ -1,11 +1,15 @@
 var photosService = require('../../service/photos-service');
 
 module.exports = function (req, res) {
-	photosService.popularPhotos(req.user.token)
-		.then(res.json)
+	// hardcode token for now
+	var token = 'b5eee221c5405e013c10478242a6f6dffcdd9292';
+	photosService.popularPhotos(token)
+		.then(function(data){
+			res.json(data);
+		})
 		.catch(function (err) {
 			res.json({
-				msg: err
+				error: err
 			})
 		});
 };

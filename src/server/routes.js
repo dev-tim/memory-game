@@ -13,8 +13,8 @@ module.exports = function registerRoutes (app) {
 	app.get('/', index);
 
 //	app.get('/login', authLogin);
-	app.get('/photos', isAuthenticated, photosList);
-	app.get('/stats', isAuthenticated, statsInfo);
+	app.get('/photos', photosList);
+	app.get('/stats', statsInfo);
 
 	//app.get('/auth/eyeem',
 	//	passport.authenticate('eyeem'),

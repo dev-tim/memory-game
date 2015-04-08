@@ -1,12 +1,14 @@
 var Promise = require('es6-promise').Promise;
 var rest = require('restler');
 var config = require('../config/config');
+var url = require('url');
 
 module.exports = {
 
 	popularPhotos: function (token) {
 		return new Promise(function (resolve, reject) {
-			rest.get(url.resolve(config.api.apiHost, '/photos/popular'), {
+			var u = url.resolve(config.api.apiHost, '/photos/popular');
+			rest.get(u, {
 				timeout: 10000,
 				query: {
 					access_token: token
