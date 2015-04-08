@@ -6,7 +6,6 @@ var photosService = require('services/photos-service');
 
 var deviceStore = Reflux.createStore({
 	init: function init () {
-		this.listenTo(discoveryStore, this.onDiscoveryUpdate);
 		this.listenTo(actions.fetchCards, this.onFetchCards);
 		this.onFetchCards();
 		this.cardsList = [];
@@ -34,10 +33,10 @@ var deviceStore = Reflux.createStore({
 	},
 
 	updateError: function updateError (error) {
-		this.deviceList = {
+		this.cardsList = {
 			error: error
 		};
-		this.trigger(this.deviceList);
+		this.trigger(this.cardsList);
 	}
 });
 

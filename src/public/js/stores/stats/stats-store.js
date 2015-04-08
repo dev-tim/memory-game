@@ -1,45 +1,29 @@
 var Reflux = require('reflux');
 var _ = require('lodash');
 
-var deviceActions = require('actions/device');
-var devicesService = require('services/devices/devices-service');
-var discoveryStore = require('stores/discovery-store');
+var actions = require('actions');
 
 var deviceStore = Reflux.createStore({
 	init: function init () {
-		this.listenTo(discoveryStore, this.onDiscoveryUpdate);
-		this.listenTo(deviceActions.fetchList, this.onFetchList);
+		this.listenTo(actions.cardsMatchedWin, this.onCardsMatchFailed);
+		this.listenTo(actions.cardsMatchFailed, this.onCardsMatchFailed);
 
-		this.deviceList = this.createModel([]);
-		this.onFetchList();
-	},
-
-	createModel: function createModel (devices) {
-		return {
-			devices: devices,
-			deviceById: _.indexBy(devices, 'id'),
-			error: null
-		};
+		this.stats = {};
 	},
 
 	getInitialState: function getInitialState () {
-		return this.deviceList;
+		return this.stats;
 	},
 
-	onDiscoveryUpdate: function onDisoveryUpdate () {
-		this.onFetchList();
+	onCardsMatchWin: function onFetchList () {
+		this.updateModel({})
+	},
+	onCardsMatchFailed: function onFetchList () {
+		this.updateModel({})
 	},
 
-	onFetchList: function onFetchList () {
-		var self = this;
-		devicesService.fetchDeviceList()
-			.subscribe(self.updateModel.bind(self),
-			self.updateError.bind(self));
-	},
-
-	updateModel: function updateModel (devices) {
-		this.deviceList = this.createModel(devices);
-		this.trigger(this.deviceList);
+	updateModel: function updateModel (stats) {
+		this.stats = stats
 	},
 
 	updateError: function updateError (error) {

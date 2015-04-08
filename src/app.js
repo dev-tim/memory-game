@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var setupRoutes = require('./server/routes');
 var setupPassport = require('./server/auth/setup');
+var cors = require('cors');
 
 var app = express();
 
@@ -20,6 +21,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
+app.use(cors());
 
 setupPassport(app);
 setupRoutes(app);

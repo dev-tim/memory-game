@@ -16,3 +16,5 @@ var routes = (
 Router.run(routes, function runner (Handler, state) {
 	React.render(<Handler params={state.params}/>, document.body);
 });
+
+module.exports = {};
