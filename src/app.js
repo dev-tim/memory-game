@@ -1,10 +1,27 @@
 var express = require('express');
-var routes = require('./routes');
+var hbs = require('express-hbs');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var setupRoutes = require('./server/routes');
+var setupPassport = require('./server/auth/setup');
+
+var app = express();
+
+//setup view engine
+app.engine('hbs', hbs.express4({
+	partialsDir: __dirname + '/server/views/partials'
+}));
+app.set('view engine', 'hbs');
+app.set('views', __dirname + '/server/views');
+app.use(express.static(__dirname + '/public'));
 
 
+//setup express stuff
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+app.use(cookieParser());
 
-//register routes
-var app = routes(express());
-
+setupPassport(app);
+setupRoutes(app);
 
 module.exports = app;

@@ -1,4 +1,10 @@
 {
-  "clientId": "BsW2gJRhFN7Y7A8tu2vZBvPVViGXPHEn",
-  "clientSecret": "WRsGvScSiyNnUJQ8u3SPEKhzUAAFteLK"
+  "auth": {
+    "clientId": "BsW2gJRhFN7Y7A8tu2vZBvPVViGXPHEn",
+    "clientSecret": "WRsGvScSiyNnUJQ8u3SPEKhzUAAFteLK",
+    "authCallbackUrl" : "http://localhost:3000/auth/eyeem/callback"
+  },
+  "api" : {
+    "apiHost" : "https://api.eyeem.com/v2"
+  }
 }
