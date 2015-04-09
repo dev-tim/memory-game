@@ -4,7 +4,8 @@
   "description": "Memory game with cool photos to train your brain",
   "main": "index.js",
   "scripts": {
-    "start": "node hot-reload-server.js",
+    "start": "node index.js",
+    "dev-server": "node hot-reload-server.js",
     "bundle": "webpack -p --config webpack.config.js ",
     "bundle-dev": "webpack -d -w --config webpack.config.js"
   },
