@@ -1,3 +1,89 @@
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    background-color: #272b30;
+    perspective: 500;
+    margin: 5px;
+    border: #ffffff solid 1px;
+}
+
+.flipper {
+    transition: 0.8s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.card.opened .flipper {
+    transform: rotateY(180deg);
+}
+
+.card.correct {
+    background: #62c462;
+}
+
+.card.wrong {
+    background: #ee5f5b;
+}
+
+.card img {
+    width: 130px;
+    height: 130px;
+    margin: 10px 0 0 10px;
+}
+
+.card .back {
+    animation: rotating 100s linear
+}
+
+.card .front {
+    animation: rotating 100ms linear
+}
+
+.front, .back {
+    backface-visibility: hidden;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.front {
+    z-index: 2;
+    /* for firefox 31 */
+    transform: rotateY(0deg);
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+.center-absolute {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.players-info {
+    width: 29%;
+    height: 100%;
+}
+
+.players-form {
+    width: 70%;
+    height: 100%;
+}
+
 .vertical-center {
     min-height: 100%;
     min-height: 100vh;
