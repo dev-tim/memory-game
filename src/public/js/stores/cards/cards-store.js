@@ -28,7 +28,8 @@ var deviceStore = Reflux.createStore({
 
 	updateModel: function updateModel (cards) {
 		cards = cards || [];
-		this.cardsList = _.shuffle(cards);
+
+		this.cardsList = _.shuffle(cards.concat(cards));
 		this.trigger(this.cardsList);
 	},
 
