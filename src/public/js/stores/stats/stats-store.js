@@ -3,35 +3,37 @@ var _ = require('lodash');
 
 var actions = require('actions');
 
-var deviceStore = Reflux.createStore({
+module.exports = Reflux.createStore({
 	init: function init () {
-		this.listenTo(actions.cardsMatchedWin, this.onCardsMatchFailed);
-		this.listenTo(actions.cardsMatchFailed, this.onCardsMatchFailed);
+		this.listenTo(actions.cardsMatchedWin, this.onCardsMatchWin);
 
-		this.stats = {};
+		this.stats = {
+			model: {}
+		};
 	},
 
 	getInitialState: function getInitialState () {
 		return this.stats;
 	},
 
-	onCardsMatchWin: function onFetchList () {
-		this.updateModel({})
-	},
-	onCardsMatchFailed: function onFetchList () {
-		this.updateModel({})
+	onCardsMatchWin: function onCardsMatchWin (player) {
+		var model = this.stats.model;
+
+		var playerStats = model[player.name] || {};
+		playerStats.score = playerStats.score || 0;
+		playerStats.score = playerStats.score + 1;
+		model[player.name] = playerStats;
+
+		this.updateModel(model);
 	},
 
 	updateModel: function updateModel (stats) {
-		this.stats = stats
+		var result = _.merge(this.stats, stats);
+		this.trigger(result);
 	},
 
 	updateError: function updateError (error) {
-		this.deviceList = {
-			error: error
-		};
-		this.trigger(this.deviceList);
+		var result = _.merge(this.stats.error, error);
+		this.trigger(result);
 	}
 });
-
-module.exports = deviceStore;
