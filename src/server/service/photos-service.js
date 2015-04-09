@@ -5,12 +5,13 @@ var url = require('url');
 
 module.exports = {
 
-	popularPhotos: function (token) {
+	popularPhotos: function (token, limit) {
 		return new Promise(function (resolve, reject) {
 			var u = url.resolve(config.api.apiHost, '/photos/popular');
 			rest.get(u, {
 				timeout: 10000,
 				query: {
+					limit : limit || 8,
 					access_token: token
 				}
 			}).on('timeout', function (ms) {

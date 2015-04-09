@@ -20,11 +20,11 @@
     "longjohn": "^0.2.4",
     "passport": "^0.2.1",
     "passport-eyeem": "^0.1.1",
-    "react": "^0.12.2",
-    "react-router": "^0.12.4",
+    "react": "^0.13.x",
+    "react-router": "^0.13.2",
     "reflux": "^0.2.5",
     "restler": "^3.2.2",
-    "tcomb-form": "^0.4.2",
+    "tcomb-form": "^0.4.8",
     "whatwg-fetch": "^0.7.0"
   },
   "devDependencies": {
