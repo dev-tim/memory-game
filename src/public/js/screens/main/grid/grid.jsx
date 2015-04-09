@@ -3,7 +3,10 @@ var Reflux = require('reflux');
 var _ = require('lodash');
 
 var cardsStore = require('stores/cards/cards-store');
+var playersStore = require('stores/players/players-store');
 var actions = require('actions');
+
+var Card = require('./card');
 
 function handleFirstCard (card) {
 	this.setState({
@@ -15,11 +18,16 @@ function handleFirstCard (card) {
 
 function handleSecondCard (card) {
 	var prevCard = this.state.prevCard;
-	if (card === prevCard) {
+	card.open();
+
+	if (card.equalToAnotherCard(prevCard)) {
 		prevCard.succeed();
-		actions.cardsMatchedWin()
+		card.succeed();
+		actions.cardsMatchedWin(this.state.players.model.currentPlayer)
 	} else {
-		actions.cardsMatchFailed()
+		prevCard.fail();
+		card.fail();
+		actions.cardsMatchFailed(this.state.players.model.currentPlayer)
 	}
 	this.setState({
 		prevCard: null,
@@ -30,7 +38,8 @@ function handleSecondCard (card) {
 module.exports = React.createClass({
 
 	mixins: [
-		Reflux.connect(cardsStore, 'cards')
+		Reflux.connect(cardsStore, 'cards'),
+		Reflux.connect(playersStore, 'players')
 	],
 
 	getInitialState: function getInitialState () {
@@ -55,7 +64,7 @@ module.exports = React.createClass({
 		}, this);
 
 		return (
-			<div>
+			<div className="well bs-component flex-container grid">
 				{renderedCards}
 			</div>
 		);

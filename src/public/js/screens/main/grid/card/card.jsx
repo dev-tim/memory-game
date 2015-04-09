@@ -1,6 +1,6 @@
 var React = require('react');
 var Reflux = require('reflux');
-var cx = React.addons.classSet;
+var cx = require('react/lib/cx');
 
 
 module.exports = React.createClass({
@@ -17,7 +17,7 @@ module.exports = React.createClass({
 		}
 	},
 
-	reveal: function () {
+	open: function () {
 		this.setState({
 			opened: true
 		});
@@ -40,19 +40,26 @@ module.exports = React.createClass({
 		this.setState({flipped: true, correct: true});
 	},
 
+	equalToAnotherCard: function equalToAnotherCard (anotherCard) {
+		return this.props.card.url
+			=== anotherCard.props.card.url;
+	},
+
 
 	render: function () {
 		var classes = cx({
+			'flex-item': true,
+			'card': true,
 			'opened': this.state.opened,
 			'correct': this.state.correct,
 			'wrong': this.state.wrong
 		});
 
 		return (
-			<div className={'brick '+ (classes || '')} onClick={this.onClickCaught}>
-				<div className="front">?</div>
-				<div className="back">
-					<img src={this.props.url} className="img-thumbnail"/>
+			<div className={classes} onClick={this.onClickCaught}>
+				<div className="flipper">
+						<img src="/assets/img/question.png" className="front img-circle"/>
+						<img src={this.props.card.url} className="back img-circle"/>
 				</div>
 			</div>
 		);
