@@ -21,13 +21,15 @@ module.exports = React.createClass({
 	onClick: function () {
 		var players = this.refs.form.getValue();
 
-		if (players) {
+		if (players && players.length > 0) {
 			actions.addPlayers(players);
 
 			// TODO make an separate action
 			setTimeout(function(){
 				this.context.router.transitionTo('game');
-			}.bind(this), 1000);
+			}.bind(this), 100);
+		} else {
+			alert('Enter players names');
 		}
 	},
 
